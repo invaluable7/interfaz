@@ -1,5 +1,7 @@
 package interfaz;
 
+import javax.swing.*;
+
 /**
  *
  * @author LENOVO
@@ -12,6 +14,9 @@ public class calculadora extends javax.swing.JFrame {
     private Double estatura=0.0;
     private Double peso=0.0;
     private Double IMC = 0.0;
+    private Boolean genero = false;//femenino Falso
+                                   //masculino Verdadero
+
 
 
 
@@ -33,7 +38,7 @@ public class calculadora extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        Genero = new javax.swing.ButtonGroup();
         Masculino = new javax.swing.JRadioButton();
         Femenino = new javax.swing.JRadioButton();
         titulo = new java.awt.Label();
@@ -58,7 +63,7 @@ public class calculadora extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(550, 450));
         getContentPane().setLayout(null);
 
-        buttonGroup1.add(Masculino);
+        Genero.add(Masculino);
         Masculino.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         Masculino.setText("Masculino");
         Masculino.setName("Masculino"); // NOI18N
@@ -70,7 +75,6 @@ public class calculadora extends javax.swing.JFrame {
         getContentPane().add(Masculino);
         Masculino.setBounds(40, 80, 150, 30);
 
-        buttonGroup1.add(Femenino);
         Femenino.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         Femenino.setText("Femenino");
         Femenino.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +129,7 @@ public class calculadora extends javax.swing.JFrame {
 
         Calcular.setBackground(new java.awt.Color(0, 143, 57));
         Calcular.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        Calcular.setForeground(new java.awt.Color(255, 255, 255));
+        Calcular.setForeground(new java.awt.Color(200, 200, 200));
         Calcular.setText("Calcular");
         Calcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,11 +175,54 @@ public class calculadora extends javax.swing.JFrame {
 
                 if (evt.getSource() == Calcular) {
 
+                    genero=Masculino.isSelected();
                     edad=Double.parseDouble(Edad.getText().replace(",","."));
                     estatura=Double.parseDouble(Estatura.getText().replace(",","."));
                     peso=Double.parseDouble(Peso.getText().replace(",","."));
 
                     IMC=peso/(estatura*estatura);
+                    int imc=0;
+                    if (IMC <= 18.5) {
+                        imc=1;//bajo peso
+                    }else if (IMC > 18.5 && IMC <=24.9) {
+                        imc = 2;//peso normal
+                    } else if (IMC >24.9 &&  IMC<=29.9) {
+                        imc=3;//sobre peso
+                    } else if (IMC>29.9) {
+                        imc=4;//obesidad
+                    }
+
+                    if (genero) {
+                        switch (imc){
+                            case 1:
+                                JOptionPane.showMessageDialog(this, "bajo peso"+IMC);
+                                Edad.setText("");
+                                Estatura.setText("");
+                                Peso.setText("");
+                                break;
+                            case 2:
+                                JOptionPane.showMessageDialog(this, "peso normal"+IMC);
+                                Edad.setText("");
+                                Estatura.setText("");
+                                Peso.setText("");
+                                break;
+                            case 3:
+                                JOptionPane.showMessageDialog(this, "sobrepeso"+IMC);
+                                Edad.setText("");
+                                Estatura.setText("");
+                                Peso.setText("");
+                                break;
+                            case 4:
+                                JOptionPane.showMessageDialog(this, "obesidad"+IMC);
+                                Edad.setText("");
+                                Estatura.setText("");
+                                Peso.setText("");
+                                break;
+
+                        }
+
+
+                    }
 
                     setTitle(IMC.toString());
 
@@ -183,7 +230,10 @@ public class calculadora extends javax.swing.JFrame {
 
                 }
             } catch (NumberFormatException e) {
-                setTitle("Error");
+                JOptionPane.showMessageDialog(this, "los datos deben ser numericos (estatura en metros y peso en kg)");
+                Edad.setText("");
+                Estatura.setText("");
+                Peso.setText("");
             }
 
 
@@ -259,16 +309,15 @@ public class calculadora extends javax.swing.JFrame {
     private javax.swing.JTextField Edad;
     private javax.swing.JTextField Estatura;
     private javax.swing.JRadioButton Femenino;
+    private javax.swing.ButtonGroup Genero;
     private javax.swing.JRadioButton Masculino;
     private javax.swing.JTextField Peso;
     private java.awt.Label Tedad;
     private java.awt.Label Testatura;
     private java.awt.Label Tpeso;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel icono;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea2;
     private java.awt.Label titulo;
-
     // End of variables declaration//GEN-END:variables
 }
