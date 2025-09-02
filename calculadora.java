@@ -8,6 +8,11 @@ package interfaz;
 
 public class calculadora extends javax.swing.JFrame {
 
+    private Double edad=0.0;
+    private Double estatura=0.0;
+    private Double peso=0.0;
+    private Double IMC = 0.0;
+
 
 
     /**
@@ -159,11 +164,32 @@ public class calculadora extends javax.swing.JFrame {
 
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
         // TODO add your handling code here:
-        if (evt.getSource() == Calcular) {
 
-            setTitle(Peso.getText());
 
-        }
+
+            try{
+
+                if (evt.getSource() == Calcular) {
+
+                    edad=Double.parseDouble(Edad.getText().replace(",","."));
+                    estatura=Double.parseDouble(Estatura.getText().replace(",","."));
+                    peso=Double.parseDouble(Peso.getText().replace(",","."));
+
+                    IMC=peso/(estatura*estatura);
+
+                    setTitle(IMC.toString());
+
+
+
+                }
+            } catch (NumberFormatException e) {
+                setTitle("Error");
+            }
+
+
+
+
+
     }//GEN-LAST:event_CalcularActionPerformed
 
     private void FemeninoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemeninoActionPerformed
