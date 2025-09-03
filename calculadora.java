@@ -193,6 +193,7 @@ public class calculadora extends JFrame {
                     estatura=Double.parseDouble(Estatura.getText().replace(",","."));
                     peso=Double.parseDouble(Peso.getText().replace(",","."));
 
+
                     IMC=peso/(estatura*estatura);
                     int imc=0;
                     if (IMC <= 18.5) {
