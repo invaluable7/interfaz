@@ -1,4 +1,4 @@
-        package interfaz;
+package interfaz;
 import interfaz.calculadora;
 
 import javax.swing.*;
@@ -10,9 +10,6 @@ import javax.swing.*;
         n.setLocationRelativeTo(null);
         n.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-        
-     
     }
             
 }

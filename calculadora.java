@@ -1,6 +1,11 @@
 package interfaz;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -8,8 +13,9 @@ import javax.swing.*;
  */
 
 
-public class calculadora extends javax.swing.JFrame {
+public class calculadora extends JFrame {
 
+    Datos n=new Datos();
     private Double edad=0.0;
     private Double estatura=0.0;
     private Double peso=0.0;
@@ -75,6 +81,7 @@ public class calculadora extends javax.swing.JFrame {
         getContentPane().add(Masculino);
         Masculino.setBounds(40, 80, 150, 30);
 
+        Genero.add(Femenino);
         Femenino.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         Femenino.setText("Femenino");
         Femenino.addActionListener(new java.awt.event.ActionListener() {
@@ -104,15 +111,15 @@ public class calculadora extends javax.swing.JFrame {
 
         Testatura.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         Testatura.setForeground(new java.awt.Color(0, 0, 0));
-        Testatura.setText("Estatura");
+        Testatura.setText("Estatura (m)");
         getContentPane().add(Testatura);
         Testatura.setBounds(30, 190, 100, 28);
 
         Tpeso.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         Tpeso.setForeground(new java.awt.Color(0, 0, 0));
-        Tpeso.setText("Peso");
+        Tpeso.setText("Peso (Kg)");
         getContentPane().add(Tpeso);
-        Tpeso.setBounds(30, 230, 70, 28);
+        Tpeso.setBounds(30, 230, 80, 28);
 
         icono.setFont(new java.awt.Font("Dialog", 0, 8)); // NOI18N
         icono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -129,7 +136,7 @@ public class calculadora extends javax.swing.JFrame {
 
         Calcular.setBackground(new java.awt.Color(0, 143, 57));
         Calcular.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        Calcular.setForeground(new java.awt.Color(200, 200, 200));
+        Calcular.setForeground(new java.awt.Color(255, 255, 255));
         Calcular.setText("Calcular");
         Calcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,9 +173,15 @@ public class calculadora extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
+
+
+    private void CalcularActionPerformed(ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
         // TODO add your handling code here:
 
+        String mensajeIMC = "";
+        String Rutina="";
+        String Dieta="";
+        Boolean seguir=true;
 
 
             try{
@@ -191,37 +204,143 @@ public class calculadora extends javax.swing.JFrame {
                     } else if (IMC>29.9) {
                         imc=4;//obesidad
                     }
+                    
+                    
 
                     if (genero) {
                         switch (imc){
                             case 1:
-                                JOptionPane.showMessageDialog(this, "bajo peso"+IMC);
-                                Edad.setText("");
-                                Estatura.setText("");
-                                Peso.setText("");
+                                mensajeIMC="Bajo Peso";
+                                if (edad < 18) {
+                                    Rutina=n.getRutina1N();
+                                    Dieta=n.getDieta1();
+                                    Limpiar();
+                                } else if (edad >=18 && edad <39) {
+                                    Rutina=n.getRutina1ha();
+                                    Dieta=n.getDieta1();
+                                    Limpiar();
+                                } else if (edad>=40) {
+                                    Rutina=n.getRutina1N();
+                                    Dieta=n.getDieta1();
+                                    Limpiar();
+                                }
+
+
                                 break;
                             case 2:
-                                JOptionPane.showMessageDialog(this, "peso normal"+IMC);
-                                Edad.setText("");
-                                Estatura.setText("");
-                                Peso.setText("");
+                                if (edad < 18) {
+                                    Rutina=n.getRutina2N();
+                                    Dieta=n.getDieta2();
+                                    Limpiar();
+                                } else if (edad >=18 && edad <39) {
+                                    Rutina=n.getRutina2ha();
+                                    Dieta=n.getDieta2();
+                                    Limpiar();
+                                } else if (edad>=40) {
+                                    Rutina=n.getRutina2N();
+                                    Dieta=n.getDieta2();
+                                    Limpiar();
+                                }
+
                                 break;
                             case 3:
-                                JOptionPane.showMessageDialog(this, "sobrepeso"+IMC);
-                                Edad.setText("");
-                                Estatura.setText("");
-                                Peso.setText("");
+                                if (edad < 18) {
+                                    Rutina=n.getRutina3N();
+                                    Dieta=n.getDieta3();
+                                    Limpiar();
+                                } else if (edad >=18 && edad <39) {
+                                    Rutina=n.getRutina3ha();
+                                    Dieta=n.getDieta3();
+                                    Limpiar();
+                                } else if (edad>=40) {
+                                    Rutina=n.getRutina3N();
+                                    Dieta=n.getDieta3();
+                                    Limpiar();
+                                }
                                 break;
                             case 4:
-                                JOptionPane.showMessageDialog(this, "obesidad"+IMC);
-                                Edad.setText("");
-                                Estatura.setText("");
-                                Peso.setText("");
+                                if (edad < 18) {
+                                    Rutina=n.getRutina4N();
+                                    Dieta=n.getDieta4();
+                                    Limpiar();
+                                } else if (edad >=18 && edad <39) {
+                                    Rutina=n.getRutina4ha();
+                                    Dieta=n.getDieta4();
+                                    Limpiar();
+                                } else if (edad>=40) {
+                                    Rutina=n.getRutina4N();
+                                    Dieta=n.getDieta4();
+                                    Limpiar();
+                                }
                                 break;
-
                         }
+                    }else {
+                        switch (imc){
+                            case 1:
+                                mensajeIMC="Bajo Peso";
+                                if (edad < 18) {
+                                    Rutina=n.getRutina1N();
+                                    Dieta=n.getDieta1();
+                                    Limpiar();
+                                } else if (edad >=18 && edad <39) {
+                                    Rutina=n.getRutina1ma();
+                                    Dieta=n.getDieta1();
+                                    Limpiar();
+                                } else if (edad>=40) {
+                                    Rutina=n.getRutina1N();
+                                    Dieta=n.getDieta1();
+                                    Limpiar();
+                                }
 
 
+                                break;
+                            case 2:
+                                if (edad < 18) {
+                                    Rutina=n.getRutina2N();
+                                    Dieta=n.getDieta2();
+                                    Limpiar();
+                                } else if (edad >=18 && edad <39) {
+                                    Rutina=n.getRutina2ma();
+                                    Dieta=n.getDieta2();
+                                    Limpiar();
+                                } else if (edad>=40) {
+                                    Rutina=n.getRutina2N();
+                                    Dieta=n.getDieta2();
+                                    Limpiar();
+                                }
+
+                                break;
+                            case 3:
+                                if (edad < 18) {
+                                    Rutina=n.getRutina3N();
+                                    Dieta=n.getDieta3();
+                                    Limpiar();
+                                } else if (edad >=18 && edad <39) {
+                                    Rutina=n.getRutina3ma();
+                                    Dieta=n.getDieta3();
+                                    Limpiar();
+                                } else if (edad>=40) {
+                                    Rutina=n.getRutina3N();
+                                    Dieta=n.getDieta3();
+                                    Limpiar();
+                                }
+                                break;
+                            case 4:
+                                if (edad < 18) {
+                                    Rutina=n.getRutina4N();
+                                    Dieta=n.getDieta4();
+                                    Limpiar();
+                                } else if (edad >=18 && edad <39) {
+                                    Rutina=n.getRutina4ma();
+                                    Dieta=n.getDieta4();
+                                    Limpiar();
+                                } else if (edad>=40) {
+                                    Rutina=n.getRutina4N();
+                                    Dieta=n.getDieta4();
+                                    Limpiar();
+                                }
+                                break;
+                        }
                     }
 
                     setTitle(IMC.toString());
@@ -231,10 +350,17 @@ public class calculadora extends javax.swing.JFrame {
                 }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "los datos deben ser numericos (estatura en metros y peso en kg)");
-                Edad.setText("");
-                Estatura.setText("");
-                Peso.setText("");
+                Limpiar();
+                seguir=false;
             }
+        if (seguir) {
+            VentanaInfo dialogo = new VentanaInfo(this, true);
+            dialogo.setMensaje(mensajeIMC);
+            dialogo.setRutina(Rutina);
+            dialogo.setDieta(Dieta);
+            dialogo.setVisible(true);
+        }
+
 
 
 
@@ -242,16 +368,16 @@ public class calculadora extends javax.swing.JFrame {
 
     }//GEN-LAST:event_CalcularActionPerformed
 
-    private void FemeninoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemeninoActionPerformed
+    private void FemeninoActionPerformed(ActionEvent evt) {//GEN-FIRST:event_FemeninoActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_FemeninoActionPerformed
 
-    private void MasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MasculinoActionPerformed
+    private void MasculinoActionPerformed(ActionEvent evt) {//GEN-FIRST:event_MasculinoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MasculinoActionPerformed
 
-    private void PesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesoActionPerformed
+    private void PesoActionPerformed(ActionEvent evt) {//GEN-FIRST:event_PesoActionPerformed
         // TODO add your handling code here:
 
 
@@ -259,11 +385,11 @@ public class calculadora extends javax.swing.JFrame {
 
 
 
-    private void EstaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstaturaActionPerformed
+    private void EstaturaActionPerformed(ActionEvent evt) {//GEN-FIRST:event_EstaturaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EstaturaActionPerformed
 
-    private void EdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdadActionPerformed
+    private void EdadActionPerformed(ActionEvent evt) {//GEN-FIRST:event_EdadActionPerformed
         // TODO add your handling code here:
 
     }//GEN-LAST:event_EdadActionPerformed
@@ -278,25 +404,25 @@ public class calculadora extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(calculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(calculadora.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(calculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(calculadora.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(calculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(calculadora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(calculadora.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(calculadora.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new calculadora().setVisible(true);
             }
@@ -320,4 +446,11 @@ public class calculadora extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea2;
     private java.awt.Label titulo;
     // End of variables declaration//GEN-END:variables
+
+    private void Limpiar (){
+
+        Edad.setText("");
+        Estatura.setText("");
+        Peso.setText("");
+    }
 }
